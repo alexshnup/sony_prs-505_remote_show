@@ -4,7 +4,7 @@ This script for remotely display images on the E-ink screen Sony Reader PRS-505 
 
 #Install and use
 
-If you have already installed the firmware [prs-plus](https://code.google.com/archive/p/prs-plus/), then you just need to put prsp.sh file to a specified "directory/database/system/PRSPlus". Reboot reader without cable connected (to allow start scrypt). Reader it will continue to operate as normal but also can remotely display images via USB cable. When connected to the USB, you will see the new RAW disk size of 1 MB. Didn't need to format, it should be RAW. With command "dd" can display images on the screen.
+If you have already installed the firmware [prs-plus](https://code.google.com/archive/p/prs-plus/), then you just need to put files prsp.sh and showpic to a specified "directory/database/system/PRSPlus". Reboot reader without cable connected (to allow start scrypt). Reader it will continue to operate as normal but also can remotely display images via USB cable. When connected to the USB, you will see the new RAW disk size of 1 MB. Didn't need to format, it should be RAW. With command "dd" can display images on the screen.
 
 #for Ubuntu
 
@@ -28,7 +28,7 @@ Create any jpg file with size  600x800
  
 Now you can send image to e-ink
 ```
-djpeg -pnm -grayscale test.jpg |dd of=/dev/sde bs=480k
+djpeg -pnm -grayscale test.jpg | dd bs=1 skip=15 | dd of=/dev/sde bs=480k
 ```
 
 #Additional information

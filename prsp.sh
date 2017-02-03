@@ -29,12 +29,12 @@ function showpic
 	then
 	echo $'\n===============\nOK!!! New data received\n'  >> /dev/console
 
-	#Back Screen for best clear e-ink (optional)
+	#Generating Back Screen for best clear e-ink (optional)
 	dd if=/dev/zero of=/tmp/img.raw bs=1k count=480
-	/Data/showpic /tmp/img.raw
+	/Data/database/system/PRSPlus/showpic /tmp/img.raw
 
 	dd if=/tmp/raw.img of=/tmp/img.raw bs=1k count=480
-	/Data/showpic /tmp/img.raw
+	/Data/database/system/PRSPlus/showpic /tmp/img.raw
 	fi
 	waitnewdata
 }

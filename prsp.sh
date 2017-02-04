@@ -15,7 +15,7 @@ function waitnewdata
 	do
 	MODIFYTIMENEW=`ls -l --full-time /tmp/raw.img | awk ' {print $9} '`
 
-	sleep 0.2 
+	sleep 0.2
 	done
 
 	showpic
@@ -31,10 +31,10 @@ function showpic
 
 	#Generating Back Screen for best clear e-ink (optional)
 	dd if=/dev/zero of=/tmp/img.raw bs=1k count=480
-	/Data/database/system/PRSPlus/showpic /tmp/img.raw
+	/tmp/showpic /tmp/img.raw
 
 	dd if=/tmp/raw.img of=/tmp/img.raw bs=1k count=480
-	/Data/database/system/PRSPlus/showpic /tmp/img.raw
+	/tmp/showpic /tmp/img.raw
 	fi
 	waitnewdata
 }
@@ -59,7 +59,7 @@ rmmod g_file_storage
 
 
 
-#Create raw file 1Mb 
+#Create raw file 1Mb
 echo $'\n===============\nDD\n'  >> /dev/console
 dd if=/dev/zero of=/tmp/raw.img bs=1k count=1k
 
@@ -75,7 +75,7 @@ if [ $? == 0 ]; then
         insmod /lib/modules/2.4.17_n12/kernel/drivers/usb/g_file_storage.o file=/dev/mtdblock$NUM,/dev/sdmscard/r5c807b,/dev/sdmscard/r5c807a,/tmp/raw.img ProductID=$MODEL VendorSpecific=$VENDOR sn_select=0 iSerialNumber=$ID
 else
 		echo $'\n===============\nLoad g_file_storage without mtd\n'  >> /dev/console
-        insmod /lib/modules/2.4.17_n12/kernel/drivers/usb/g_file_storage.o file=/dev/sdmscard/r5c807b,/dev/sdmscard/r5c807a ProductID=$MODEL VendorSpecific=$VENDOR sn_select=0 iSerialNumber=$ID
+        insmod /lib/modules/2.4.17_n12/kernel/drivers/usb/g_file_storage.o file=/dev/sdmscard/r5c807b,/dev/sdmscard/r5c807a,/tmp/raw.img ProductID=$MODEL VendorSpecific=$VENDOR sn_select=0 iSerialNumber=$ID
 		echo $'\n===============\nno Data pertition\n'  >> /dev/console
 fi
 
@@ -86,8 +86,6 @@ echo $'\n===============\nSet Env\n'  >> /dev/console
 #start kbook application
 nohup  /opt/sony/ebook/application/tinyhttp > /dev/null &
 
+cp /Data/database/system/PRSPlus/showpic /tmp/
+
 waitnewdata
-
-
-
-

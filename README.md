@@ -34,3 +34,5 @@ djpeg -pnm -grayscale test.jpg | dd bs=1 skip=15 | dd of=/dev/sde bs=480k
 #Additional information
 This script create a tmpfs temporary drive to the RAM memory and does not save anything on the flash memory. This method will not damage your reader and is safe.
 
+#Quick Start
+For fast add function usb-screen in PRS-505, unpack archive showpic.zip to internal flash memory. Disconnect USB cable, press RESET then power-ON.  After reboot, we will offer to update the firmware. Updating. Reset. The USB cable should be connected only when the full start device, otherwise it will boot without a new function. 
